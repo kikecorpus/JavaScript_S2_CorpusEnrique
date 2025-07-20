@@ -85,4 +85,36 @@ function verGuardarReporte() {
     return opcionMostrarReporte;
 }
 
+const dataGastos = {
+  data: [
+    {
+      id: 1,
+      monto: 45000,
+      categoria: "transporte",
+      descripcion: "Taxi al trabajo",
+      fecha: "2025-05-01"
+    },
+    {
+      id: 2,
+      monto: 25000,
+      categoria: "comida",
+      descripcion: "Almuerzo en restaurante",
+      fecha: "2025-04-15"
+    }
+]
+
+
+logs: [
+   
+  ]
+
+reportes: [
+ 
+  ]
+
+}
+
+
+
+
 
