@@ -14,7 +14,7 @@ function principalMenu() {
 
     let opcionNumerica = prompt(">>> Ingresa tu opcion:\n>>> ");
     return opcionNumerica;
-}
+};
 
 function ModificarOpcion1Menu() {
     console.log("\n=============================================");
@@ -29,7 +29,7 @@ function ModificarOpcion1Menu() {
 
     let opcionModificar = prompt(">>> Ingresa tu opción:\n>>> ");
     return opcionModificar;
-}
+};
 
 function ListarOpcion2Menu() {
     console.log("\n=============================================");
@@ -45,7 +45,7 @@ function ListarOpcion2Menu() {
 
     let opcionListar = prompt(">>> Ingresa tu opcion:\n>>> ");
     return opcionListar;
-}
+};
 
 function CalcularOpcion3Menu() {
     console.log("\n=============================================");
@@ -60,7 +60,7 @@ function CalcularOpcion3Menu() {
 
     let opcionCalcular = prompt(">>> Ingresa tu opcion:\n>>> ");
     return opcionCalcular;
-}
+};
 
 function ReporteOpcion4Menu() {
     console.log("\n=============================================");
@@ -75,7 +75,7 @@ function ReporteOpcion4Menu() {
 
     let opcionReporte = prompt(">>> Ingresa tu opcion:\n>>> ");
     return opcionReporte;
-}
+};
 
 function verGuardarReporte() {
     console.log("*** Nota: la opcion #2 guarda el reporte en un archivo externo para consultar el reporte luego ***\n");
@@ -83,38 +83,130 @@ function verGuardarReporte() {
 
     let opcionMostrarReporte = prompt("1. Ver Reporte \n2. Guardar Reporte en un archivo externo\n>>> ");
     return opcionMostrarReporte;
-}
+};
 
+
+// DATA
 const dataGastos = {
-  data: [
-    {
-      id: 1,
-      monto: 45000,
-      categoria: "transporte",
-      descripcion: "Taxi al trabajo",
-      fecha: "2025-05-01"
-    },
-    {
-      id: 2,
-      monto: 25000,
-      categoria: "comida",
-      descripcion: "Almuerzo en restaurante",
-      fecha: "2025-04-15"
+    data: [
+        {
+            id: 1,
+            monto: 45000,
+            categoria: "transporte",
+            descripcion: "Taxi al trabajo",
+            fecha: "2025-05-01"
+        },
+        {
+            id: 2,
+            monto: 25000,
+            categoria: "comida",
+            descripcion: "Almuerzo en restaurante",
+            fecha: "2025-04-15"
+        }
+    ]
+
+};
+
+// FUNCIONES
+
+function registrarGastos() {
+    const listaGastos = dataGastos.data;
+
+    console.log("\n=============================================");
+    console.log("           Registrar Nuevo Gasto           ");
+    console.log("=============================================");
+
+    let cantidadRegistrar = parseInt(prompt("Ingresa la cantidad de gastos que deseas registrar:\n>>> "));
+
+    for (let i = 1; i <= cantidadRegistrar; i++) {
+        console.log("\n=============================================");
+        console.log("           Registrar Gasto #"+ i);
+        console.log("=============================================");
+
+        let montoGasto = parseFloat(prompt("-. Ingrese el monto del gasto:\n>>> "));
+        let categoriaGasto = prompt("-. Ingrese la categoria del gasto:\n>>> ").toLowerCase();
+        let descripcionGasto = prompt("-. Ingrese la descripción del gasto (opcional):\n>>> ").toLowerCase();
+
+        let fecha = "";
+
+          while (true) {
+            console.log("\n-. Ingrese la Fecha en que realizó el gasto:");
+            console.log("     1. Fecha actual");
+            console.log("     2. Fecha personalizada");
+
+            let opcionFecha = parseInt(prompt(">>> Selecciona una opción:\n>>> "));
+
+            if (opcionFecha === 1) {
+                fecha = new Date().toISOString().split("T")[0];
+                break;
+                
+            } else if (opcionFecha === 2) {
+                let anio = parseInt(prompt("   Año (YYYY): "));
+                let mes = parseInt(prompt("   Mes (MM): ")) - 1;
+                let dia = parseInt(prompt("   Día (DD): "));
+                fecha = new Date(anio, mes, dia).toISOString().split("T")[0];
+                break;
+            } else {
+                console.log("\nOpción inválida. Ingresa una opción entre '1' y '2'.");
+            }
+        }
+
+    
+    let id = listaGastos.length > 0 ? Math.max(...listaGastos.map(g => g.id)) + 1 : 1;
+
+    const nuevoGasto = {
+      id: id,
+      monto: montoGasto,
+      categoria: categoriaGasto,
+      descripcion: descripcionGasto,
+      fecha: fecha
+    };
+
+      
+    let guardarCancelar = "";
+    while (guardarCancelar !== "salir") {
+      console.log("Ingrese 'S' para guardar o 'C' para cancelar");
+      guardarCancelar = prompt(">>> Ingresa tu opción:\n>>> ").toLowerCase();
+
+      if (guardarCancelar === "s") {
+        listaGastos.push(nuevoGasto); 
+        console.log("\n-*--*- Gasto añadido exitosamente -*--*-");
+        console.table([nuevoGasto]);
+        guardarCancelar = "salir";
+
+      } else if (guardarCancelar === "c") {
+        console.log("\n-*--*- Gasto no añadido -*--*-");
+        guardarCancelar = "salir";
+      } else {
+        console.log("\nIngresa una opción válida entre 's' o 'c'");
+      }
     }
-]
 
-
-logs: [
+    console.log("=============================================");
    
-  ]
+  }
 
-reportes: [
- 
-  ]
+   return listaGastos;
 
+};
+
+
+// PRINCIPAL
+
+
+let opcionPrincipal = parseInt(principalMenu());
+
+console.log(opcionPrincipal);
+
+if (opcionPrincipal === 1) {
+  let opcionModificar = parseInt(ModificarOpcion1Menu());
+  console.log(opcionModificar);
+
+  if (opcionModificar === 1) {
+    let lista =  registrarGastos(); 
+    console.log(lista)
+  }
 }
+ 
 
-
-
-
-
+   
