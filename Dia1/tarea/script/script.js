@@ -103,7 +103,8 @@ const dataGastos = {
             descripcion: "Almuerzo en restaurante",
             fecha: "2025-04-15"
         }
-    ]
+    ],
+
 
 };
 
@@ -191,6 +192,26 @@ function registrarGastos() {
 };
 
 
+function verGastos(dataGastos1) { 
+
+  let dataGastos = dataGastos1
+
+  console.table(dataGastos)
+
+}
+
+function verGastoCategoria(dataGastos1){
+
+  let dataGastos = dataGastos1
+
+  console.log("ingrese la Categoria que desea filtrar")
+    let categoriaing = prompt("")
+    listaCategorias = dataGastos.filter((categoria) == categoriaing)
+    console.table =(listaCategorias)
+}
+
+
+
 // PRINCIPAL
 
 
@@ -200,13 +221,43 @@ console.log(opcionPrincipal);
 
 if (opcionPrincipal === 1) {
   let opcionModificar = parseInt(ModificarOpcion1Menu());
-  console.log(opcionModificar);
+  console.log(opcionModificar)
 
   if (opcionModificar === 1) {
     let lista =  registrarGastos(); 
-    console.log(lista)
-  }
+    dataGastos[data].push(lista)
+    console.table(lista)
+  };
+
 }
+
+
+else if (opcionPrincipal === 2) {
+
+  let opcionListar= ListarOpcion2Menu()
+
+  if (opcionListar === 1){
+
+    verGastos()
+  }
+
+  else if (opcionListar ===2){
+
+
+  }
+
+
+
+
+
+  }
+
+  else if(opcionModificar === 3){
+    
+  }
+
+
+;
  
 
    
