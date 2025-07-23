@@ -110,8 +110,8 @@ const dataGastos = {
 
 // FUNCIONES
 
-function registrarGastos(dataGastos1) {
-    const listaGastos = dataGastos1;
+function registrarGastos() {
+    const listaGastos = dataGastos.data;
 
     console.log("\n=============================================");
     console.log("           Registrar Nuevo Gasto           ");
@@ -210,7 +210,7 @@ function verGastoCategoria(dataGastos1){
     console.table =(listaCategorias)
 }
 
-function 
+
 
 // PRINCIPAL
 
