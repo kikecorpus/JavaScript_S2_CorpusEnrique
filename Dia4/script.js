@@ -25,36 +25,36 @@ let ingredientes = [ {
     }] ;
 
 let categorias = [
-    {
+    {   "id":1,
         "nombre": "Clásica",
         "descripcion": "Hamburguesas clásicas y sabrosas"
     },
-    {
+    {   "id": 2,
         "nombre": "Vegetariana",
         "descripcion": "Hamburguesas sin carne, perfectas para vegetarianos"
     },
-    {
+    {   "id": 3,
         "nombre": "Gourmet",
         "descripcion": "Hamburguesas gourmet con ingredientes premium"
     }
 ];
 
 let hamburguesas = [
-    {
+    {   "id": 1, 
         "nombre": "Clásica",
         "categoria": "Clásica",
         "ingredientes": ["Pan", "Carne de res", "Queso cheddar", "Lechuga", "Tomate", "Cebolla", "Mayonesa", "Ketchup"],
         "precio": 10,
         "chef": "ChefA"
     },
-    {
+    {   "id": 2,
         "nombre": "Vegetariana",
         "categoria": "Vegetariana",
         "ingredientes": ["Pan integral", "Hamburguesa de lentejas", "Queso suizo", "Espinacas", "Cebolla morada", "Aguacate", "Mayonesa vegana"],
         "precio": 8,
         "chef": "ChefB"
     },
-    {
+    {   "id": 3,
         "nombre": "Doble Carne",
         "categoria": "Gourmet",
         "ingredientes": ["Pan de sésamo", "Doble carne de res", "Queso cheddar", "Bacon", "Lechuga", "Cebolla caramelizada", "Salsa BBQ"],
@@ -226,7 +226,7 @@ while (boleano === true) {
 };
     }
 
-    //
+//--------------------------------------
 
     else if (opcionPrincipal === 2) {
 
@@ -253,7 +253,7 @@ while (boleano === true) {
         let precio = parseFloat(prompt("Precio:"));
         let chef = prompt("Nombre del chef:");
 
-        let idH = hamburguesas.length > 0 ? Math.max(...hamburguesas.map(h => h.id)) + 1: 1;
+        let idH = hamburguesas.length > 0 ? Math.max(...hamburguesas.map(h => h.id)) + 1 : 1;
 
 
         let nuevaHamburguesa = {
@@ -266,7 +266,7 @@ while (boleano === true) {
             };
 
         hamburguesas.push(nuevaHamburguesa);
-        alert("Hamburguesa creada con éxito.");
+        alert("Hamburguesa creada con éxito.\n"+ JSON.stringify(nuevaHamburguesa));
         
     }
 
@@ -287,9 +287,9 @@ while (boleano === true) {
             let nuevaCategoria = prompt("Nueva categoría:", hamburguesas[buscarID].categoria);
             
             let nuevosIngredientes = [];
-            let numIngredientes = parseInt(prompt("¿Cuántos ingredientes desea ingresar nuevamente?"));
+            let numIngredientes = parseInt(prompt("¿Cuantos ingredientes desea ingresar nuevamente?"));
             for (let i = 1; i <= numIngredientes; i++) {
-                let nuevoIng = prompt(`Ingrediente ${i}:`);
+                let nuevoIng = prompt("Ingrediente #" + i);
                 nuevosIngredientes.push(nuevoIng);
             }
 
@@ -307,45 +307,193 @@ while (boleano === true) {
         }
 
         
-        else if(opcionPedido === 4){}
+        else if(opcionPedido === 4){
+
+        let idEliminar = parseInt(prompt("Ingresa el ID de la hamburguesa que deseas eliminar:"));
+
+        let buscarEliminar = hamburguesas.findIndex(hambn => hambn.id === idEliminar);
+
+        if (buscarEliminar !== -1) {
+
+        let eliminarCancelarIng = prompt(`Si desear eliminar la hamburguesa ingresa 'eliminar' de lo contrario presiona cancelar `).toLowerCase();
+
+        if (eliminarCancelarIng === "eliminar"){
+            ingredientes.splice(buscarEliminar, 1); 
+            alert("Hamburguesa eliminadacon Exito");
+        }
+
+        else {
+        alert("OperaciOn cancelada");
+        }
+        }
         else if(opcionPedido === 5){}
     
 }
-
+//-------------------------------
     else if (opcionPrincipal === 3) {
 
-    let opcionCategorias = parseInt( prompt(`====================================
-        GESTION DE CATEGORIAS
+        let opcionPedido =  parseInt(prompt(`      CATEGORIAS
+        1. Crear Categorias
+        2. Ver Categorias
+        3. Actualizar Categorias
+        4. Eliminar Categorias
+        5. Volver al menú principal`));
+       
+        if(opcionPedido === 1) {
+          
+        let nombre = prompt("Nombre de la Categoria:");
+        let categoria = prompt("Descripcion:");
+        
 
-        Seleccione una opcion:
-        1.Añadir Categoria
-        2.Eliminar Categoria
-        3.Consultar Categoria
-        `));
+
+
+        let idH = categorias.length > 0 ? Math.max(...categorias.map(h => h.id)) + 1 : 1;
+
+
+        let nuevaCategoria = {
+                "id": idH,
+                "nombre": nombre,
+                "descripcion": categoria,
+            };
+
+        categorias.push(nuevaCategoria);
+        alert("Categorias creada con éxito.\n"+ JSON.stringify(nuevaCategoria));
+        
+        }
+
+        else if(opcionPedido === 2){
+
+            alert(JSON.stringify(categorias, null, 2))
+        }
+
+        else if(opcionPedido === 3){
+
+            idActualizar = parseInt(prompt("ingresa el ID de la hamburgesa que desear actualizar la informacion"))
+
+            buscarID = categorias.findIndex(hamb => hamb.id === idActualizar)
+
+            if (buscarID !== -1) {
+            alert("Categoria encontrada:\n" + JSON.stringify(categorias[buscarID], null, 2));
+                let nuevoNombre = prompt("Nuevo nombre:", categorias[buscarID].nombre);
+                let nuevaCategoria = prompt("Nueva descripcion:", categorias[buscarID].categoria);
+            
+           
+            categorias[buscarID].nombre = nuevoNombre;
+            categorias[buscarID].categoria = nuevaCategoria;
+
+            alert(" Categorias actualizada con exito:\n" + JSON.stringify(categorias[buscarID], null, 2));
+            }
+        }
+
+        else if (opcionPedido === 4) {
+
+        let idEliminar = parseInt(prompt("Ingresa el ID de la categorias que deseas eliminar:"));
+
+        let buscarEliminar = categorias.findIndex(hambn => hambn.id === idEliminar);
+
+        if (buscarEliminar !== -1) {
+
+        let eliminarCancelarIng = prompt(`Si desear eliminar la categorias ingresa 'eliminar' de lo contrario presiona cancelar `).toLowerCase();
+
+        if (eliminarCancelarIng === "eliminar"){
+            categorias.splice(buscarEliminar, 1); 
+            alert("Categoria eliminada con Exito");
+        }
+
+        else {
+        alert("OperaciOn cancelada");
+        }
+        }
+        else if(opcionPedido === 5){}
+    }
 
 }
-
+//-----------------------
     else if(opcionPrincipal === 4) {
-        let opcionChefs = parseInt( prompt(`====================================
-        GESTION DE CHEFS
+        let opcionPedido =  parseInt(prompt(`      CHEFS
+        1. Crear Chefs
+        2. Ver Chefs
+        3. Actualizar Chefs
+        4. Eliminar Chefs
+        5. Volver al menú principal`));
+       
+        if(opcionPedido === 1) {
+          
+        let nombre = prompt("Nombre del Chefs:");
+        let especialidad = prompt("Especialidad:");
+        
 
-        Seleccione una opcion:
-        1.Añadir Categoria
-        2.Eliminar Categoria
-        3.Consultar Categoria
-        `));
+        let idH = Chefs.length > 0 ? Math.max(...Chefs.map(h => h.id)) + 1 : 1;
 
 
+        let nuevoChefs = {
+                "id": idH,
+                "nombre": nombre,
+                "especialidad": especialidad,
+            };
+
+        Chefs.push(nuevoChefs);
+        alert("Hamburguesa creada con éxito.\n"+ JSON.stringify(nuevoChefs));
+        
+    }
+
+    else if(opcionPedido === 2){
+
+        alert(JSON.stringify(Chefs, null, 2))
+    }
+
+    else if(opcionPedido === 3){
+
+        idActualizar = parseInt(prompt("ingresa el ID de la Chefs que desear actualizar la informacion"))
+
+        buscarID = Chefs.findIndex(hamb => hamb.id === idActualizar)
+
+        if (buscarID !== -1) {
+        alert("Categoria encontrada:\n" + JSON.stringify(Chefs[buscarID], null, 2));
+            let nuevoNombre = prompt("Nuevo nombre:", Chefs[buscarID].nombre);
+            let nuevaCategoria = prompt("Nueva especialidad:", Chefs[buscarID].categoria);
+        
+       
+            Chefs[buscarID].nombre = nuevoNombre;
+            Chefs[buscarID].categoria = nuevaCategoria;
+
+        alert(" Categorias actualizada con exito:\n" + JSON.stringify(categorias[buscarID], null, 2));
+        }
+    }
+
+    else if (opcionPedido === 4) {
+
+    let idEliminar = parseInt(prompt("Ingresa el ID de la Chefs que deseas eliminar:"));
+
+    let buscarEliminar = Chefs.findIndex(hambn => hambn.id === idEliminar);
+
+    if (buscarEliminar !== -1) {
+
+    let eliminarCancelarIng = prompt(`Si desear eliminar la Chefs ingresa 'eliminar' de lo contrario presiona cancelar `).toLowerCase();
+
+    if (eliminarCancelarIng === "eliminar"){
+        Chefs.splice(buscarEliminar, 1); 
+        alert("Chefs eliminada con Exito");
+    }
+
+    else {
+    alert("OperaciOn cancelada");
+    }
+    }
+    else if(opcionPedido === 5){}
 }
 
+}
+//--------------
     else if(opcionPrincipal === 5) {
 
          alert("cerrando el programa, vuelve pronto...")
         boleano = false;
 
     }
-
+//-------
     else {
         alert(" Opción no valida, Intenta de nuevo");
+};
 };
 }
