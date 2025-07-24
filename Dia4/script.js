@@ -80,6 +80,7 @@ let Chefs = [
 
 //algoritmo
 
+
 boleano = true;
 
 while (boleano === true) {
@@ -229,63 +230,85 @@ while (boleano === true) {
 
     else if (opcionPrincipal === 2) {
 
-        let opcionPedido = parseInt( prompt(`====================================
-            GESTION DE PEDIDOS
-
-            Seleccione una opcion:
-            1.Añadir Pedido
-            2.Eliminar Pedido
-            3.Consultar Pedido
-
-            `));
+        let opcionPedido =  parseInt(prompt(`      HAMBURGUESAS 
+        1. Crear hamburguesa
+        2. Ver hamburguesas
+        3. Actualizar hamburguesa
+        4. Eliminar hamburguesa
+        5. Volver al menú principal`));
        
         if(opcionPedido === 1) {
 
+        let ingredienteHamb=[]            
+        let nombre = prompt("Nombre de la hamburguesa:");
+        let categoria = prompt("Categoría:");
         
-                let nombreIngrediente =prompt(`====================================
-                
-                    A continuacion ingrese nombre`);
-                
+        let numIng = parseInt(prompt("cuantos ingredientes desea ingresar"))
+        for (let i = 1; i <= numIng ; i++ ){
+
+         let ingrediente1 = prompt("Ingresa el ingrediente numero" + i);
+         ingredienteHamb.push(ingrediente1)
+        }
+      
+        let precio = parseFloat(prompt("Precio:"));
+        let chef = prompt("Nombre del chef:");
+
+        let idH = hamburguesas.length > 0 ? Math.max(...hamburguesas.map(h => h.id)) + 1: 1;
+
+
+        let nuevaHamburguesa = {
+                "id": idH,
+                "nombre": nombre,
+                "categoria": categoria,
+                "ingredientes":ingredienteHamb,
+                "precio":precio,
+                "chef":chef
+            };
+
+        hamburguesas.push(nuevaHamburguesa);
+        alert("Hamburguesa creada con éxito.");
         
-                let descripcionIngrediente =prompt(`====================================
+    }
+
+        else if(opcionPedido === 2){
+
+            alert(JSON.stringify(hamburguesas, null, 2))
+        }
+
+        else if(opcionPedido === 3){
+
+            idActualizar = parseInt(prompt("ingresa el ID de la hamburgesa que desear actualizar la informacion"))
+
+            buscarID = hamburguesas.findIndex(hamb => hamb.id === idActualizar)
+
+            if (buscarID !== -1) {
+            alert("Hamburgesa encontrada:\n" + JSON.stringify(ingredientes[buscarID], null, 2));
+                let nuevoNombre = prompt("Nuevo nombre:", hamburguesas[buscarID].nombre);
+            let nuevaCategoria = prompt("Nueva categoría:", hamburguesas[buscarID].categoria);
             
-                
-                    A continuacion ingres la descripcion`);
-                
+            let nuevosIngredientes = [];
+            let numIngredientes = parseInt(prompt("¿Cuántos ingredientes desea ingresar nuevamente?"));
+            for (let i = 1; i <= numIngredientes; i++) {
+                let nuevoIng = prompt(`Ingrediente ${i}:`);
+                nuevosIngredientes.push(nuevoIng);
+            }
+
+            let nuevoPrecio = parseFloat(prompt("Nuevo precio:", hamburguesas[buscarID].precio));
+            let nuevoChef = prompt("Nuevo nombre del chef:", hamburguesas[buscarID].chef);
+
+            hamburguesas[buscarID].nombre = nuevoNombre;
+            hamburguesas[buscarID].categoria = nuevaCategoria;
+            hamburguesas[buscarID].ingredientes = nuevosIngredientes;
+            hamburguesas[buscarID].precio = nuevoPrecio;
+            hamburguesas[buscarID].chef = nuevoChef;
+
+            alert(" Hamburguesa actualizada con exito:\n" + JSON.stringify(hamburguesas[buscarID], null, 2));
+            }
+        }
+
         
-                let precioIngrediente =prompt(`===================================
-                
-                    A continuacion ingrese el precio`);
-                
-        
-                let chef =prompt(`====================================
-                
-                    A continuacion ingrese el chef`);
-        
-                let id = listaGastos.length > 0 ? Math.max(...listaGastos.map(g => g.id)) + 1 : 1;
-        
-                
-                   let  nuevoIngrediente = {
-                    "id": id,
-                    "nombre": nombreIngrediente,
-                    "descripcion": descripcionIngrediente,
-                    "precio": precioIngrediente,
-                    "Chef": chef
-                   };
-                    
-        
-               let guardarCancelarIng = prompt(`Ingrese 's' para guardar el ingrediente  o 'c' para cancelar `).toLowerCase();
-        
-        
-        
-               if (guardarCancelarIng === "s") {
-        
-                    ingredientes.push(nuevoIngrediente)
-            
-                    alert(JSON.stringify(ingredientes))
-               }
-            
-    }  
+        else if(opcionPedido === 4){}
+        else if(opcionPedido === 5){}
     
 }
 
