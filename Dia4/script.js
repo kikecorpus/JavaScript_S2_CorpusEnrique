@@ -24,7 +24,6 @@ let ingredientes = [ {
         "stock": 200
     }] ;
 
-
 let categorias = [
     {
         "nombre": "Clásica",
@@ -79,7 +78,6 @@ let Chefs = [
     }
 ];
 
-
 //algoritmo
 
 boleano = true;
@@ -91,11 +89,11 @@ while (boleano === true) {
         la cafeteria Campuslamds
 
     A continuacion seleccione una opcion:
-    1.Ingredientes.
-    2.Pedidos
-    3.Categorias
-    4.Cheft
-    5.salir
+    1. Ingredientes.
+    2. Hamburguesas.
+    3. Categorias.
+    4. Chefs.
+    5. salir.
     ====================================`));
 
     if(opcionPrincipal === 1) {
@@ -104,40 +102,40 @@ while (boleano === true) {
     GESTION DE INGREDIENTES
 
     A continuacion seleccione una opcion:
-    1. Añadir Ingredientes.
-    2. Eliminar Ingredientes.
-    3. Consultar Ingredientes.
-    4.regresar al menu Principal
+    
+    1. Crear ingrediente
+    2. Consultar ingredientes
+    3. Actualizar ingrediente
+    4. Eliminar ingrediente
+    5. Volver al menú principal
+    
     ====================================`));
 
 
     if (opcionIngredientes === 1) {
 
         
-        let nombreIngrediente =prompt(`====================================
-        AÑADIR INGREDIENTE
+        let nombreIngrediente =prompt(`===================================
         
-            A continuacion ingrese nombre del ingrediente`);
+            A continuacion ingrese el nombre del ingrediente`);
         
 
         let descripcionIngrediente =prompt(`====================================
-            DESCRIPCION INGREDIENTE
+       
         
-            A continuacion ingres la descripcion del ingrediente`);
-        
-
-        let precioIngrediente =prompt(`====================================
-            AÑADIR INGREDIENTE
-        
-            A continuacion ingrese el precio del ingrediente`);
+            A continuacion ingrese la descripcion del ingrediente`);
         
 
-        let stockIngrediente =prompt(`====================================
-            AÑADIR INGREDIENTE
+        let precioIngrediente = parseFloat( prompt(`====================================
         
-            A continuacion ingrese la cantidad del ingrediente`);
+            A continuacion ingrese el precio del ingrediente`));
+        
 
-        let id = listaGastos.length > 0 ? Math.max(...listaGastos.map(g => g.id)) + 1 : 1;
+        let stockIngrediente = parseInt(prompt(`====================================
+        
+            A continuacion ingrese la cantidad del ingrediente`));
+
+        let id = ingredientes.length > 0 ? Math.max(...ingredientes.map(g => g.id)) + 1 : 1;
 
         
            let  nuevoIngrediente = {
@@ -157,34 +155,77 @@ while (boleano === true) {
 
             ingredientes.push(nuevoIngrediente)
     
-            window.prompt(JSON.stringify(ingredientes))
+            alert(JSON.stringify(nuevoIngrediente))
        }
-
 }
 
     else if (opcionIngredientes === 2) {
 
-        let eliminarId = prompt(`Ingresa el id del gasto que deseas eliminar`)
+        alert(JSON.stringify(ingredientes, null, 2))
+    }
 
-        let nuevaListaE = ingredientes.filter((ingredientes["id"]) == eliminarId)
-        prompt(JSON.stringify(nuevaListaE))
-        }
-
-      
-
+    
     else if (opcionIngredientes === 3) {
 
-        console.table(ingredientes)
+        let idActualizar = parseInt(prompt("Ingresa el ID del ingrediente que deseas actualizar:"));
+
+        let buscarID = ingredientes.findIndex(ingrediente => ingrediente.id === idActualizar);
+
+        if (buscarID !== -1) {
+            alert("Ingrediente actual:\n" + JSON.stringify(ingredientes[buscarID], null, 2));
+
+        let nuevoNombre = prompt("Nuevo nombre:", ingredientes[buscarID].nombre);
+        let nuevaDescripcion = prompt("Nueva descripción:", ingredientes[buscarID].descripcion);
+        let nuevoPrecio = parseFloat(prompt("Nuevo precio:", ingredientes[buscarID].precio));
+        let nuevoStock = parseInt(prompt("Nuevo stock:", ingredientes[buscarID].stock));
+
+        ingredientes[buscarID].nombre = nuevoNombre;
+        ingredientes[buscarID].descripcion = nuevaDescripcion;
+        ingredientes[buscarID].precio = nuevoPrecio;
+        ingredientes[buscarID].stock = nuevoStock;
+
+        alert("Ingrediente actualizado con exito:\n" + JSON.stringify(ingredientes[buscarID], null, 2));
+        } 
+        
+        else {
+        alert(" No se encontro ningún ingrediente con ese ID");
+        }
 
     }
 
     else if (opcionIngredientes === 4) {
 
+        let idEliminar = parseInt(prompt("Ingresa el ID del ingrediente que deseas eliminar:"));
 
+        let buscarEliminar = ingredientes.findIndex(ingrediente => ingrediente.id === idEliminar);
+
+    if (buscarEliminar !== -1) {
+
+        let eliminarCancelarIng = prompt(`Si desear eliminar el ingrediente ingresa 'eliminar' de lo contrario presiona cancelar `).toLowerCase();
+
+        if (eliminarCancelarIng === "eliminar"){
+            ingredientes.splice(buscarEliminar, 1); 
+            alert("Ingrediente eliminado con Exito");
+        }
+
+        else {
+        alert("OperaciOn cancelada");
+        }
+        
     }
 
-
 }
+
+    else if (opcionIngredientes === 5) {
+       alert("Regresando al menú principal...")
+    }
+    
+    else {
+        alert(" Opción no valida, Intenta de nuevo");
+};
+    }
+
+    //
 
     else if (opcionPrincipal === 2) {
 
@@ -241,7 +282,7 @@ while (boleano === true) {
         
                     ingredientes.push(nuevoIngrediente)
             
-                    window.prompt(JSON.stringify(ingredientes))
+                    alert(JSON.stringify(ingredientes))
                }
             
     }  
@@ -276,8 +317,12 @@ while (boleano === true) {
 
     else if(opcionPrincipal === 5) {
 
-
+         alert("cerrando el programa, vuelve pronto...")
         boleano = false;
 
     }
+
+    else {
+        alert(" Opción no valida, Intenta de nuevo");
 };
+}
