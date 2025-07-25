@@ -162,8 +162,24 @@ while (boleano === true) {
     //consultar
     else if (opcionIngredientes === 2) {
 
-        alert(JSON.stringify(ingredientes, null, 2))
+       if (ingredientes.length === 0) {
+        alert("La lista está vacía.");
+    } else {
+        for (let i = 0; i < ingredientes.length; i++) {
+            let elemento = ingredientes[i];
+            let mensaje = "Ingrediente " + (i + 1) + " de " + ingredientes.length + "\n";
+
+            for (let clave in elemento) {
+                mensaje = mensaje + clave + ": " + elemento[clave] + "\n";
+            }
+
+            let siguiente = confirm(mensaje + "¿Desea ver el siguiente ingrediente?");
+            if (siguiente !== true) {
+                break; 
+            }
+        }
     }
+}
 
     //actualizar
     else if (opcionIngredientes === 3) {
@@ -270,7 +286,24 @@ while (boleano === true) {
         //consultar
         else if(opcionPedido === 2){
 
-            alert(JSON.stringify(hamburguesas, null, 2))
+        if (hamburguesas.length === 0) {
+            alert("La lista de hamburguesas está vacía.");
+        } 
+        else {
+            for (let i = 0; i < hamburguesas.length; i++) {
+                let hamburguesa = hamburguesas[i];
+                let mensaje = "Hamburguesa " + (i + 1) + " de " + hamburguesas.length + "\n";
+
+                for (let clave in hamburguesa) {
+                    mensaje = mensaje + clave + ": " + hamburguesa[clave] + "\n";
+                }
+
+                let siguiente = confirm(mensaje + "¿Desea ver la siguiente hamburguesa?");
+                if (siguiente !== true) {
+                    break;
+                }
+            }
+        }
         }
         //actualizar
         else if(opcionPedido === 3){
@@ -362,7 +395,25 @@ while (boleano === true) {
         //consultar
         else if(opcionPedido === 2){
 
-            alert(JSON.stringify(categorias, null, 2))
+        if (categorias.length === 0) {
+         alert("La lista de categorías está vacía.");
+        } 
+
+        else {
+            for (let i = 0; i < categorias.length; i++) {
+                let categoria = categorias[i];
+                let mensaje = "Categoría " + (i + 1) + " de " + categorias.length + "\n";
+
+                for (let clave in categoria) {
+                    mensaje = mensaje + clave + ": " + categoria[clave] + "\n";
+                }
+
+                let siguiente = confirm(mensaje + "¿Desea ver la siguiente categoría?");
+                if (!siguiente) {
+                    break;
+                    }
+                }
+            }
         }
         //actualizar    
         else if(opcionPedido === 3){
@@ -440,7 +491,25 @@ while (boleano === true) {
         //consultar
         else if(opcionPedido === 2){
 
-            alert(JSON.stringify(Chefs, null, 2))
+            if (chefs.length === 0) {
+                alert("La lista de chefs está vacía.");
+            }
+            
+            else {
+                for (let i = 0; i < chefs.length; i++) {
+                    let chef = chefs[i];
+                    let mensaje = "Chef " + (i + 1) + " de " + chefs.length + "\n";
+
+                    for (let clave in chef) {
+                        mensaje = mensaje + clave + ": " + chef[clave] + "\n";
+                    }
+
+                    let siguiente = confirm(mensaje + "¿Desea ver el siguiente chef?");
+                    if (!siguiente) {
+                        break;
+                    }
+                }
+            }
         }
         //actualizar
         else if(opcionPedido === 3){
