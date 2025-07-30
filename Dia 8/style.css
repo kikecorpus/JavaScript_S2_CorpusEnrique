@@ -1,3 +1,9 @@
+
+.buscador {
+    display: flex;
+    flex-direction: row;
+    
+}
 .propiedades div {
     border-bottom: 1px solid black;
 }

@@ -11,11 +11,47 @@ function buscarPersonaje(){
             try{
 
                 const daticos = JSON.parse(xhr.responseText);
-                alert("The character is: Name: " + daticos["results"][0]["name"] +
-                " Height: " + daticos["results"][0]["height"] +
-                " Mass: " + daticos["results"][0]["mass"] +
-                " Gender: " + daticos["results"][0]["gender"] +
-                " Birth Year: " + daticos["results"][0]["birth_year"]);
+
+                //conectar mediante el id el los parrafos para cada info 
+                let name = document.getElementById("name");
+                let height = document.getElementById("height");
+                let mass = document.getElementById("mass");
+                let hair_color = document.getElementById("hair_color");
+                let skin_color = document.getElementById("skin_color");
+                let eye_color = document.getElementById("eye_color");
+                let birth_year = document.getElementById("birth_year");
+                let gender = document.getElementById("gender");
+                let homeworld = document.getElementById("homeworld");
+                let films = document.getElementById("films");
+                let species = document.getElementById("species");
+                let vehicles = document.getElementById("vehicles");
+                let starships = document.getElementById("starships");
+                let created = document.getElementById("created");
+                let edited = document.getElementById("edited");
+                let url = document.getElementById("url");
+
+
+                // modificar el dom     
+                let dataExacta = daticos.results[0]
+                name.textContent = "Name: " + datos.name;
+                height.textContent = "Height: " + datos.height;
+                mass.textContent = "Mass: " + datos.mass;
+                hair_color.textContent = "Hair Color: " + datos.hair_color;
+                skin_color.textContent = "Skin Color: " + datos.skin_color;
+                eye_color.textContent = "Eye Color: " + datos.eye_color;
+                birth_year.textContent = "Birth Year: " + datos.birth_year;
+                gender.textContent = "Gender: " + datos.gender;
+                homeworld.textContent = "Homeworld: " + datos.homeworld;
+                films.textContent = "Films: " + datos.films.join(", ");
+                species.textContent = "Species: " + datos.species.join(", ");
+                vehicles.textContent = "Vehicles: " + datos.vehicles.join(", ");
+                starships.textContent = "Starships: " + (datos.starships.length > 0 ? datos.starships.join(", ") : "None");
+                created.textContent = "Created: " + datos.created;
+                edited.textContent = "Edited: " + datos.edited;
+                url.textContent = "URL: " + datos.url;
+
+
+
             }
             catch(err){
                 console.log(err.message); 
