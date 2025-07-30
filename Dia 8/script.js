@@ -1,9 +1,14 @@
+
 function buscarPersonaje(){
-    const nombreUsar= prompt("Ingresar el nombre del personaje a buscar:");
+
+    const nombreUsar = document.getElementById("searchInput").value.trim().toLowerCase();
     const xhr = new XMLHttpRequest();
     const url = `https://swapi.py4e.com/api/people/?search=${nombreUsar}`;
     console.log(url);
+
     xhr.open("GET",url,true);
+
+
     xhr.onreadystatechange = function (){
 
         if(xhr.readyState===4 && xhr.status === 200){
@@ -28,11 +33,11 @@ function buscarPersonaje(){
                 let starships = document.getElementById("starships");
                 let created = document.getElementById("created");
                 let edited = document.getElementById("edited");
-                let url = document.getElementById("url");
+                let urlElement = document.getElementById("url");
 
 
                 // modificar el dom     
-                let dataExacta = daticos.results[0]
+                let datos = daticos.results[0]
                 name.textContent = "Name: " + datos.name;
                 height.textContent = "Height: " + datos.height;
                 mass.textContent = "Mass: " + datos.mass;
@@ -48,21 +53,19 @@ function buscarPersonaje(){
                 starships.textContent = "Starships: " + (datos.starships.length > 0 ? datos.starships.join(", ") : "None");
                 created.textContent = "Created: " + datos.created;
                 edited.textContent = "Edited: " + datos.edited;
-                url.textContent = "URL: " + datos.url;
-
-
+                urlElement.textContent = "URL: " + datos.url;
 
             }
             catch(err){
                 console.log(err.message); 
         }
     };
-    xhr.send();
+
 }
-
-
-buscarPersonaje();
+xhr.send();
  }
+
+ document.getElementById("botonBuscar").addEventListener("click", buscarPersonaje);
 
  /*
  "count": 1,
