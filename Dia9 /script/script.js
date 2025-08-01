@@ -1,13 +1,11 @@
 function buscarPersonaje(){
 
-    const nombreUsar = document.getElementById("searchInput").value.trim().toLowerCase();
+    const nombreUsar = document.getElementById("searchPokemon").value.trim().toLowerCase();
     const xhr = new XMLHttpRequest();
     const url = `https://pokeapi.co/api/v2/pokemon/${nombreUsar}`;
     console.log(url);
 
     xhr.open("GET",url,true);
-
-
     xhr.onreadystatechange = function (){
 
         if(xhr.readyState===4 && xhr.status === 200){
@@ -16,23 +14,22 @@ function buscarPersonaje(){
 
                 const daticos = JSON.parse(xhr.responseText);
 
-                //conectar mediante el id el los parrafos para cada info 
-                let name = document.getElementById("name");
-           
+                let imgPokemon = daticos.sprites.front_default
 
+                document.getElementById("imgPokemon").src = imgPokemon
 
-                // modificar el dom     
-                let datos = daticos.results[0]
-                name.textContent = "Name: " + datos.name;
-
+                document.getElementById("idNombre").textContent =  daticos.id + " - " + daticos.name
             }
+
             catch(err){
                 console.log(err.message); 
         }
     };
 
 }
+
 xhr.send();
+
  }
 
- document.getElementById("botonBuscar").addEventListener("click", buscarPersonaje);
+ document.getElementById("searchPokemon").addEventListener("input", buscarPersonaje);
