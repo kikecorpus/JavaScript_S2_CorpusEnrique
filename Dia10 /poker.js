@@ -1,9 +1,7 @@
 let deckId = null;
-let carta1 = null
-let carta2 = null
-let carta3 = null
-let carta4 = null
-let carta5 = null
+let cartasHold = [];
+let mano = [];   
+
 // Barajar el mazo
 function armarMazo() {
   const xhr = new XMLHttpRequest();
@@ -11,13 +9,17 @@ function armarMazo() {
   
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function () {
+    
     if (xhr.readyState === 4 && xhr.status === 200) {
+
+       //logica aqui
       const mazoDeCartas = JSON.parse(xhr.responseText);
       deckId = mazoDeCartas.deck_id;
       console.log(mazoDeCartas) 
       console.log(deckId)
-      MazoMesa()
 
+      //resetar 
+      MazoMesa()
     }
   };
   xhr.send();
@@ -30,34 +32,32 @@ function MazoMesa() {
   
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function () {
+    
     if (xhr.readyState === 4 && xhr.status === 200) {
       const cartas = JSON.parse(xhr.responseText);
-      console.log(cartas)
-    
- for (let i = 0; i < 5; i++) {
-  const carta = cartas.cards[i];
-  const cartaImg = document.getElementById(`carta${i + 1}`);
-  cartaImg.src = carta.image;
-}
+      mano = cartas.cards;
+      console.log(cartas);
 
+    
+      //imprimir y selecionar las  5 cartas
+    for (let i = 0; i < 5; i++) {
+      const carta = mano[i];
+      const cartaImg = document.getElementById(`carta${i + 1}`);
+      cartaImg.src = carta.image;
+      cartaImg.onclick = function () {
+      cartaImg.classList.toggle("seleccionada");
+      }
     }
   };
-  xhr.send();
+ 
 }
 
-//seleecionar cartas 
-
-function hold(){
-
-
-
+ xhr.send();
 }
+
 
 armarMazo()
-console.log(carta1)
-console.log(carta2)
-console.log(carta3)
-console.log(carta4)
-console.log(carta5)
+
+
       
 

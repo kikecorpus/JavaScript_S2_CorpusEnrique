@@ -3,4 +3,16 @@
     
 }
 
+.mano img {
+ width: 100px;
+  margin: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
 
+}
+
+.mano .seleccionada {
+ border: 2px solid red;
+ 
+}
