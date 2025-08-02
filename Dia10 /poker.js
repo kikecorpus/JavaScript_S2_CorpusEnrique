@@ -19,6 +19,8 @@ function armarMazo() {
       console.log(deckId)
 
       //resetar 
+      cartasHold = [];
+
       MazoMesa()
     }
   };
@@ -55,9 +57,85 @@ function MazoMesa() {
  xhr.send();
 }
 
+//guardar cartas seleccionadas 
+function guardarHold() {
+  cartasHold = []; 
+
+  for (let i = 0; i < 5; i++) {
+    const cartaImg = document.getElementById(`carta${i + 1}`);
+    
+    if (cartaImg.classList.contains("seleccionada")) {
+      cartasHold.push(mano[i]);
+    }
+  }}
+
+// cambiar las cartas seleccionadas no seleccionadas 
+
+function pedir(){
+
+  guardarHold()
+
+  let cantidadCambiar=  5 - cartasHold.length ;
+  
+
+      if(cantidadCambiar === 0) {
+
+        mano = cartasHold
+        verNuevaMano()
+        return
+      }
+
+        const xhr = new XMLHttpRequest();
+        const url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${cantidadCambiar}`;
+
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function () {
+
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            
+            const nuevasCartas = JSON.parse(xhr.responseText).cards;
+
+            let nuevaMano = [];
+            let contador = 0;
+
+            for (let i = 0; i < 5; i++) {
+               const cartaImg = document.getElementById(`carta${i + 1}`);
+
+              if (cartaImg.classList.contains("seleccionada")) {
+              nuevaMano.push(cartasHold.shift());}
+
+              else {
+                nuevaMano.push(nuevasCartas[contador]);
+                contador++;}
+            }
+           
+
+              mano = nuevaMano;
+            verNuevaMano()
+
+      }
+        };
+
+    xhr.send();
+}
+
+
+function verNuevaMano() {
+  for (let i = 0; i < 5; i++) {
+    const carta = mano[i];
+    const cartaImg = document.getElementById(`carta${i + 1}`);
+    cartaImg.src = carta.image;
+    cartaImg.classList.remove("seleccionada");
+    cartaImg.onclick = function () {
+      cartaImg.classList.toggle("seleccionada");
+    };
+  }
+}
+
 
 armarMazo()
 
+document.getElementById("pedir").onclick = pedir;
 
       
 
