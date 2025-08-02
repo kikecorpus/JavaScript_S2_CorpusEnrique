@@ -1,6 +1,7 @@
 let deckId = null;
 let cartasHold = [];
 let mano = [];   
+let remaining1 = 52
 
 // Barajar el mazo
 function armarMazo() {
@@ -38,8 +39,9 @@ function MazoMesa() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       const cartas = JSON.parse(xhr.responseText);
       mano = cartas.cards;
+      remaining1 = cartas.remaining
       console.log(cartas);
-
+      console.log(remaining1)
     
       //imprimir y selecionar las  5 cartas
     for (let i = 0; i < 5; i++) {
@@ -59,6 +61,7 @@ function MazoMesa() {
 
 //guardar cartas seleccionadas 
 function guardarHold() {
+
   cartasHold = []; 
 
   for (let i = 0; i < 5; i++) {
@@ -70,20 +73,26 @@ function guardarHold() {
   }}
 
 // cambiar las cartas seleccionadas no seleccionadas 
-
 function pedir(){
 
   guardarHold()
 
-  let cantidadCambiar=  5 - cartasHold.length ;
+let cantidadCambiar = 5 - cartasHold.length;
   
-
+      if (remaining1 <= 5) {
+        console.log("No hay suficientes cartas, barajando nuevo mazo...");
+        cargarNuevoMazo(() => {
+          pedir(); 
+        });
+        return;
+      };
+  
       if(cantidadCambiar === 0) {
 
         mano = cartasHold
         verNuevaMano()
         return
-      }
+      };
 
         const xhr = new XMLHttpRequest();
         const url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${cantidadCambiar}`;
@@ -92,7 +101,7 @@ function pedir(){
         xhr.onreadystatechange = function () {
 
           if (xhr.readyState === 4 && xhr.status === 200) {
-            
+
             const nuevasCartas = JSON.parse(xhr.responseText).cards;
 
             let nuevaMano = [];
@@ -109,17 +118,18 @@ function pedir(){
                 contador++;}
             }
            
-
               mano = nuevaMano;
-            verNuevaMano()
-
+              if (mano.length === 5) {
+              verNuevaMano();
+            } else {
+              console.error("Error: no se pudo construir la mano completa", mano);
+            }
       }
         };
 
     xhr.send();
 }
-
-
+//mostrar nuevas cartas
 function verNuevaMano() {
   for (let i = 0; i < 5; i++) {
     const carta = mano[i];
@@ -132,6 +142,27 @@ function verNuevaMano() {
   }
 }
 
+//impedir que se acaben las cartas
+//no me funciona esta pendiente por arreglar 
+function cargarNuevoMazo(callback){ const xhr = new XMLHttpRequest();
+  const url = `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`;
+  
+  xhr.open("GET", url, true);
+  xhr.onreadystatechange = function () {
+    
+    if (xhr.readyState === 4 && xhr.status === 200) {
+
+      let rebarajado = JSON.parse(xhr.responseText);
+      remaining1 = rebarajado.remaining;
+      
+      deckId = rebarajado.deck_id;
+
+      callback()
+
+    }
+}
+xhr.send(); 
+}
 
 armarMazo()
 
