@@ -5,6 +5,7 @@ let cartasHold = [];
 let mano = [];   
 let remaining1 = 52
 let resultado = document.getElementById("resultado")
+document.getElementById("repartir").disabled = true;
 
 // Barajar el mazo
 function armarMazo() {
@@ -181,6 +182,8 @@ function verNuevaMano() {
 
 function reconocerMano(){ 
 
+const puntajeParrafo = document.getElementById("puntaje");
+let puntaje = parseInt(puntajeParrafo.textContent);
 const convertirCartas = {
 "ACE": 14, "KING": 13, "QUEEN": 12, "JACK": 11,
 "10": 10, "9": 9, "8": 8, "7": 7, "6": 6,
@@ -207,11 +210,14 @@ console.log(diccionarioPares)
 let pares = [];
 let trio = [];
 let poker = []
+let nuevoPuntaje = 0
+
 
 for (let valor in diccionarioPares) {
 
   if (diccionarioPares[valor] === 2) {
     pares.push(parseInt(valor)); 
+
   }
   else if (diccionarioPares[valor] === 3) {
     trio.push(parseInt(valor)); 
@@ -224,28 +230,42 @@ for (let valor in diccionarioPares) {
   // verificar si tiene poker
   if (poker.length === 1){
     resultado.textContent = "Tienes Poker";
-  console.log("Tienes poker")
+    puntaje += 4
   }
+  //varificar FullHouse
+  else if (trio.length === 1 && pares.length === 1) {
+  resultado.textContent = "Tienes Full House";
+  puntaje += 5;
+}
+
+
   // verificar si existe trio
   else if (trio.length === 1){
     resultado.textContent = "Tienes trio";
-    console.log("Tienes trio")
+    puntaje += 3
   }
-  //verificar si tiene par 
+
+   //verificar si tiene dobrepar 
   else if (pares.length === 2) {
   resultado.textContent = "Tienes doble par";
-  console.log("Tienes doble par")
+  puntaje += 1;
   }
- //verificar si tiene dobrepar 
+
+  //verificar si tiene par 
+
   else if ((pares.length === 1) && (pares[0] > 10)) {
-   resultado.textContent = "Tienes un par de j o mas";
-  console.log("Tienes un par de j o mas");
-  } 
+  resultado.textContent = "Tienes un par de j o mas";
+  puntaje += 2
+} 
+
+//mano perdida
   else {
 
     resultado.textContent = "mano perdida"
-  }
+    puntaje -= 1;
 
+  }
+  puntajeParrafo.textContent = puntaje;
  }
 
 
