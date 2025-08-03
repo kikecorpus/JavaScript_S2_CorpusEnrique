@@ -11,24 +11,30 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 4rem;
+    padding: 0.5rem;
+    gap: 3rem;
 }
 
 .contenedorDePagina{ 
     display: flex;
     flex-direction: column;
-    background-color: blue;
     align-items: center;
     justify-content: center;
+
     width: 70vw;
     height: 30vw;
-    border: 3px solid white;
+
+    background: radial-gradient(circle at center, #157a15, #0b3d0b); 
+    border: 15px solid #5a2d0c; 
+    border-radius: 50% / 40%; 
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); 
+    
 }
 
 .encabezado { 
     display: flex;
     width: 70vw;
-    height: 4vw;
+    
     justify-content: center;
     align-items: center;
     color: white;
@@ -36,7 +42,7 @@ body {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 6vw;
 }
 /* botones*/
 
@@ -49,11 +55,13 @@ h1 {
     align-items: center;
     gap: 1rem;
     border: 3px solid white;
+
 }
 
 .botones button {
-    width: 6vw;
+    width: 10vw;
     height: 6vw;
+  
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 
     background: radial-gradient(circle, #ff0000, #990000); 
@@ -62,11 +70,12 @@ h1 {
     font-weight: bold;
     padding: 1px;
     border: 4px solid #660000;
-    border-radius: 20px;
+    border-radius: 10vw;
     box-shadow: 0 8px 0 #660000, 0 12px 20px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition: all 0.1s ease-in-out;
     text-shadow: 1px 1px 2px black;
+    font-size: 1vw;
 }
 
 .botones button:active {
@@ -74,26 +83,62 @@ h1 {
   transform: translateY(6px);
 }
 
-.resultado p{
-
-font-size: 5rem;
-color: yellow;
- text-shadow:
-    -3px -3px 0 black,
-     3px -3px 0 black,
-    -3px  3px 0 black,
-     3px  3px 0 black;
+#jugar {
+background: radial-gradient(circle, #49cc2c, #184713); 
+box-shadow: 0 8px 0 #184713, 0 12px 20px rgba(0, 0, 0, 0.5);
+border: 4px solid  #184713;
 
 }
 
+#verificar {
+background: radial-gradient(circle, #2c69cc, #131847); 
+box-shadow: 0 8px 0 #131847, 0 12px 20px rgba(0, 0, 0, 0.5);
+border: 4px solid  #131847;
+
+}
+
+#repartir {
+background: radial-gradient(circle, #cca42c, #474113); 
+box-shadow: 0 8px 0 #474113, 0 12px 20px rgba(0, 0, 0, 0.5);
+border: 4px solid  #474113;
+
+}
+
+#reglas {
+background: radial-gradient(circle, #c7c4bc, #393636); 
+box-shadow: 0 8px 0 #393636, 0 12px 20px rgba(0, 0, 0, 0.5);
+border: 4px solid  #393636;
+
+}
+
+
+
+
+
+/*resultado*/
+
+.resultado p{
+
+font-size: 3vw;
+color: yellow;
+position: relative;
+z-index: 2;
+background-color: red;
+padding: 1rem;
+box-shadow: 0 8px 0 #c1e435, 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+    
 /* cartas */
 
 .mano { 
     display: flex;
+    position: absolute;
+    z-index: 1;
+   
 }
 
 .mano img {
-  width: 10vw;
+  width: 9vw;
   margin: 5px;
   border: 2px solid transparent;
   cursor: pointer;
@@ -104,4 +149,18 @@ color: yellow;
 .mano .seleccionada {
  border: 2px solid red;
 
+}
+
+/*Animaciones*/
+
+.resultado {
+  animation: blink 1s steps(2, start) infinite;
+  color: #fff; /* puedes cambiar el color */
+}
+
+/* Definimos la animación */
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
 }
