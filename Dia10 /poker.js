@@ -71,9 +71,6 @@ function MazoMesa() {
           cartaImg.classList.toggle("seleccionada");
         };
       }
-
-      // desactivar pedir
-      document.getElementById("pedir").disabled = false;
     }
   };
 
@@ -231,14 +228,8 @@ function reconocerMano() {
     }
   }
 
-  //verificar si tiene color
-
-  if (manoColor == true) {
-    resultado.textContent = "Tienes Color";
-    puntaje += 4;
-  }
-  // verificar si tiene poker
-  else if (poker.length === 1) {
+   // verificar si tiene poker
+ if (poker.length === 1) {
     resultado.textContent = "Tienes Poker";
     puntaje += 4;
   }
@@ -248,6 +239,17 @@ function reconocerMano() {
     puntaje += 5;
   }
 
+  //verificar si tiene color
+  if (manoColor == true) {
+    resultado.textContent = "Tienes Color";
+    puntaje += 6;
+  }
+  //verifica si es escalera
+  else if (esEscalera) {
+    resultado.textContent ="Tienes escalera";
+    puntaje += 4;
+  } 
+ 
   // verificar si existe trio
   else if (trio.length === 1) {
     resultado.textContent = "Tienes trio";
