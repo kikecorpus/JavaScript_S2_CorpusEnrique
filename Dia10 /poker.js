@@ -148,13 +148,17 @@ const convertirCartas = {
 "5": 5, "4": 4, "3": 3, "2": 2
 };
 
-let nuevosValores = mano.map(carta => convertirCartas[carta.value])
-let categoria = mano.map(palo => palo.suit)
-
-
+let nuevosValores = mano.map(carta => convertirCartas[carta.value]);
+let categoria = mano.map(palo => palo.suit);
 
 console.log(nuevosValores)
 console.log(categoria)
+
+diccionarioPares = {}
+par = nuevosValores.forEach( valor => {diccionarioPares[valor] = (diccionarioPares[valor] || 0) + 1;
+  
+});
+
 
 
 }
