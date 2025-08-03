@@ -204,7 +204,7 @@ for (let valor in diccionarioPares) {
 // algoritmo
 armarMazo()
 
-document.getElementById("pedir").onclick = pedir;
+document.getElementById("repartir").onclick = pedir;
 
       
 

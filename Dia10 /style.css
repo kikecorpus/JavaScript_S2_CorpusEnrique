@@ -1,10 +1,99 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 4rem;
+}
+
+.contenedorDePagina{ 
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    height: 30vw;
+    border: 3px solid white;
+}
+
+.encabezado { 
+    display: flex;
+    width: 70vw;
+    height: 4vw;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 3px solid white;
+}
+
+h1 {
+    font-size: 4rem;
+}
+/* botones*/
+
+.botones{ 
+    display: flex;
+    flex-direction: row;    
+    width: 70vw;
+    height: 8vw;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 3px solid white;
+}
+
+.botones button {
+    width: 6vw;
+    height: 6vw;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+
+    background: radial-gradient(circle, #ff0000, #990000); 
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1px;
+    border: 4px solid #660000;
+    border-radius: 20px;
+    box-shadow: 0 8px 0 #660000, 0 12px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    text-shadow: 1px 1px 2px black;
+}
+
+.botones button:active {
+  box-shadow: 0 2px 0 #660000, 0 4px 10px rgba(0, 0, 0, 0.4);
+  transform: translateY(6px);
+}
+
+.resultado p{
+
+font-size: 5rem;
+color: yellow;
+ text-shadow:
+    -3px -3px 0 black,
+     3px -3px 0 black,
+    -3px  3px 0 black,
+     3px  3px 0 black;
+
+}
+
+/* cartas */
+
 .mano { 
     display: flex;
-    
 }
 
 .mano img {
- width: 100px;
+  width: 10vw;
   margin: 5px;
   border: 2px solid transparent;
   cursor: pointer;
@@ -14,5 +103,5 @@
 
 .mano .seleccionada {
  border: 2px solid red;
- 
+
 }
