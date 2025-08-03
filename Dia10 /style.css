@@ -44,6 +44,24 @@ body {
 h1 {
     font-size: 6vw;
 }
+
+
+
+/* resultado*/
+
+.resultados{
+    background-color: red;
+    color: yellow;
+    width: 20vw;
+    height: 3vw;
+    font-size: 2vw;
+    text-align: center;
+    position: absolute;
+}
+
+
+
+
 /* botones*/
 
 .botones{ 
@@ -83,6 +101,13 @@ h1 {
   transform: translateY(6px);
 }
 
+.botones button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
 #jugar {
 background: radial-gradient(circle, #49cc2c, #184713); 
 box-shadow: 0 8px 0 #184713, 0 12px 20px rgba(0, 0, 0, 0.5);
@@ -112,28 +137,11 @@ border: 4px solid  #393636;
 }
 
 
-
-
-
-/*resultado*/
-
-.resultado p{
-
-font-size: 3vw;
-color: yellow;
-position: relative;
-z-index: 2;
-background-color: red;
-padding: 1rem;
-box-shadow: 0 8px 0 #c1e435, 0 12px 20px rgba(0, 0, 0, 0.5);
-}
     
 /* cartas */
 
 .mano { 
     display: flex;
-    position: absolute;
-    z-index: 1;
    
 }
 
@@ -147,20 +155,6 @@ box-shadow: 0 8px 0 #c1e435, 0 12px 20px rgba(0, 0, 0, 0.5);
 }
 
 .mano .seleccionada {
- border: 2px solid red;
-
-}
-
-/*Animaciones*/
-
-.resultado {
-  animation: blink 1s steps(2, start) infinite;
-  color: #fff; /* puedes cambiar el color */
-}
-
-/* Definimos la animación */
-@keyframes blink {
-  to {
-    visibility: hidden;
-  }
+ border: 5px solid red;
+ border-radius: 0.7vw;
 }

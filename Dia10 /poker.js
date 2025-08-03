@@ -1,7 +1,10 @@
+
+//variables globales que voy a necesitar
 let deckId = null;
 let cartasHold = [];
 let mano = [];   
 let remaining1 = 52
+let resultado = document.getElementById("resultado")
 
 // Barajar el mazo
 function armarMazo() {
@@ -15,6 +18,17 @@ function armarMazo() {
 
        //logica aqui
       const mazoDeCartas = JSON.parse(xhr.responseText);
+
+      //voltear cartas
+      for (let i = 0; i < 5; i++) {
+        const cartaImg = document.getElementById(`carta${i + 1}`);
+
+        cartaImg.src = "https://deckofcardsapi.com/static/img/back.png"
+
+        }
+
+
+
       deckId = mazoDeCartas.deck_id;
       console.log(mazoDeCartas) 
       console.log(deckId)
@@ -22,7 +36,18 @@ function armarMazo() {
       //resetar 
       cartasHold = [];
 
+      //activar boton repartir
+      document.getElementById("repartir").disabled = false; 
+    
+      //desactivar boton jugar 
+      document.getElementById("jugar").disabled = true; 
+
+      //poner cartas en mesa
       MazoMesa()
+      //resetar resultado
+      resultado.textContent = ""
+       //ocultar el resultado 
+      document.getElementById("resultados").style.display = "none";
     }
   };
   xhr.send();
@@ -52,7 +77,11 @@ function MazoMesa() {
       cartaImg.classList.toggle("seleccionada");
       }
     }
+
+// desactivar pedir 
+  document.getElementById("pedir").disabled = false; 
   };
+ 
  
 }
 
@@ -121,7 +150,17 @@ let cantidadCambiar = 5 - cartasHold.length;
 
             console.log(mano)
             console.log(remaining1)
+
+            //decir resultado
             reconocerMano()
+            //desabilitar boton pedir 
+            document.getElementById("repartir").disabled = true; 
+            //habilitar boton jugar 
+            document.getElementById("jugar").disabled = false; 
+
+            //ocultar el resultado 
+            document.getElementById("resultados").style.display = "block";
+
       }
         };
 
@@ -184,26 +223,36 @@ for (let valor in diccionarioPares) {
 }
   // verificar si tiene poker
   if (poker.length === 1){
+    resultado.textContent = "Tienes Poker";
   console.log("Tienes poker")
   }
   // verificar si existe trio
   else if (trio.length === 1){
+    resultado.textContent = "Tienes trio";
     console.log("Tienes trio")
   }
   //verificar si tiene par 
   else if (pares.length === 2) {
+  resultado.textContent = "Tienes doble par";
   console.log("Tienes doble par")
   }
  //verificar si tiene dobrepar 
   else if ((pares.length === 1) && (pares[0] > 10)) {
+   resultado.textContent = "Tienes un par de j o mas";
   console.log("Tienes un par de j o mas");
   } 
+  else {
+
+    resultado.textContent = "mano perdida"
+  }
+
  }
 
 
 // algoritmo
 
 document.getElementById("jugar").addEventListener("click", armarMazo)
+
 document.getElementById("repartir").onclick = pedir;
 
       
