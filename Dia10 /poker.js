@@ -78,14 +78,7 @@ function pedir(){
   guardarHold()
 
 let cantidadCambiar = 5 - cartasHold.length;
-  
-      if (remaining1 <= 5) {
-        console.log("No hay suficientes cartas, barajando nuevo mazo...");
-        cargarNuevoMazo(() => {
-          pedir(); 
-        });
-        return;
-      };
+
   
       if(cantidadCambiar === 0) {
 
@@ -104,6 +97,7 @@ let cantidadCambiar = 5 - cartasHold.length;
 
             const nuevasCartas = JSON.parse(xhr.responseText).cards;
 
+            remaining1 = JSON.parse(xhr.responseText).remaining
             let nuevaMano = [];
             let contador = 0;
 
@@ -124,6 +118,10 @@ let cantidadCambiar = 5 - cartasHold.length;
             } else {
               console.error("Error: no se pudo construir la mano completa", mano);
             }
+
+            console.log(mano)
+            console.log(remaining1)
+            reconocerMano()
       }
         };
 
@@ -142,28 +140,24 @@ function verNuevaMano() {
   }
 }
 
-//impedir que se acaben las cartas
-//no me funciona esta pendiente por arreglar 
-function cargarNuevoMazo(callback){ const xhr = new XMLHttpRequest();
-  const url = `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`;
-  
-  xhr.open("GET", url, true);
-  xhr.onreadystatechange = function () {
-    
-    if (xhr.readyState === 4 && xhr.status === 200) {
+function reconocerMano(){ 
 
-      let rebarajado = JSON.parse(xhr.responseText);
-      remaining1 = rebarajado.remaining;
-      
-      deckId = rebarajado.deck_id;
+const convertirCartas = {
+"ACE": 14, "KING": 13, "QUEEN": 12, "JACK": 11,
+"10": 10, "9": 9, "8": 8, "7": 7, "6": 6,
+"5": 5, "4": 4, "3": 3, "2": 2
+};
 
-      callback()
+let nuevosValores = mano.map(carta => convertirCartas[carta.value])
+let categoria = mano.map(palo => palo.suit)
 
-    }
+
+
+console.log(nuevosValores)
+console.log(categoria)
+
+
 }
-xhr.send(); 
-}
-
 armarMazo()
 
 document.getElementById("pedir").onclick = pedir;
