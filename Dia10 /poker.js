@@ -1,53 +1,47 @@
-
 //variables globales que voy a necesitar
 let deckId = null;
 let cartasHold = [];
-let mano = [];   
-let remaining1 = 52
-let resultado = document.getElementById("resultado")
+let mano = [];
+let remaining1 = 52;
+let resultado = document.getElementById("resultado");
 document.getElementById("repartir").disabled = true;
 
 // Barajar el mazo
 function armarMazo() {
   const xhr = new XMLHttpRequest();
   const url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
-  
+
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function () {
-    
     if (xhr.readyState === 4 && xhr.status === 200) {
-
-       //logica aqui
+      //logica aqui
       const mazoDeCartas = JSON.parse(xhr.responseText);
 
       //voltear cartas
       for (let i = 0; i < 5; i++) {
         const cartaImg = document.getElementById(`carta${i + 1}`);
 
-        cartaImg.src = "https://deckofcardsapi.com/static/img/back.png"
-
-        }
-
-
+        cartaImg.src = "https://deckofcardsapi.com/static/img/back.png";
+      }
 
       deckId = mazoDeCartas.deck_id;
-      console.log(mazoDeCartas) 
-      console.log(deckId)
+      console.log(mazoDeCartas);
+      console.log(deckId);
 
-      //resetar 
+      //resetar
       cartasHold = [];
 
       //activar boton repartir
-      document.getElementById("repartir").disabled = false; 
-    
-      //desactivar boton jugar 
-      document.getElementById("jugar").disabled = true; 
+      document.getElementById("repartir").disabled = false;
+
+      //desactivar boton jugar
+      document.getElementById("jugar").disabled = true;
 
       //poner cartas en mesa
-      MazoMesa()
+      MazoMesa();
       //resetar resultado
-      resultado.textContent = ""
-       //ocultar el resultado 
+      resultado.textContent = "";
+      //ocultar el resultado
       document.getElementById("resultados").style.display = "none";
     }
   };
@@ -58,114 +52,105 @@ function armarMazo() {
 function MazoMesa() {
   const xhr = new XMLHttpRequest();
   const url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=5`;
-  
+
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function () {
-    
     if (xhr.readyState === 4 && xhr.status === 200) {
       const cartas = JSON.parse(xhr.responseText);
       mano = cartas.cards;
-      remaining1 = cartas.remaining
+      remaining1 = cartas.remaining;
       console.log(cartas);
-      console.log(remaining1)
-    
+      console.log(remaining1);
+
       //imprimir y selecionar las  5 cartas
-    for (let i = 0; i < 5; i++) {
-      const carta = mano[i];
-      const cartaImg = document.getElementById(`carta${i + 1}`);
-      cartaImg.src = carta.image;
-      cartaImg.onclick = function () {
-      cartaImg.classList.toggle("seleccionada");
+      for (let i = 0; i < 5; i++) {
+        const carta = mano[i];
+        const cartaImg = document.getElementById(`carta${i + 1}`);
+        cartaImg.src = carta.image;
+        cartaImg.onclick = function () {
+          cartaImg.classList.toggle("seleccionada");
+        };
       }
+
+      // desactivar pedir
+      document.getElementById("pedir").disabled = false;
     }
-
-// desactivar pedir 
-  document.getElementById("pedir").disabled = false; 
   };
- 
- 
+
+  xhr.send();
 }
 
- xhr.send();
-}
-
-//guardar cartas seleccionadas 
+//guardar cartas seleccionadas
 function guardarHold() {
-
-  cartasHold = []; 
+  cartasHold = [];
 
   for (let i = 0; i < 5; i++) {
     const cartaImg = document.getElementById(`carta${i + 1}`);
-    
+
     if (cartaImg.classList.contains("seleccionada")) {
       cartasHold.push(mano[i]);
     }
-  }}
+  }
+}
 
-// cambiar las cartas seleccionadas no seleccionadas 
-function pedir(){
+// cambiar las cartas seleccionadas no seleccionadas
+function pedir() {
+  guardarHold();
 
-  guardarHold()
+  let cantidadCambiar = 5 - cartasHold.length;
 
-let cantidadCambiar = 5 - cartasHold.length;
+  if (cantidadCambiar === 0) {
+    mano = cartasHold;
+    verNuevaMano();
+    return;
+  }
 
-  
-      if(cantidadCambiar === 0) {
+  const xhr = new XMLHttpRequest();
+  const url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${cantidadCambiar}`;
 
-        mano = cartasHold
-        verNuevaMano()
-        return
-      };
+  xhr.open("GET", url, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const nuevasCartas = JSON.parse(xhr.responseText).cards;
 
-        const xhr = new XMLHttpRequest();
-        const url = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${cantidadCambiar}`;
+      remaining1 = JSON.parse(xhr.responseText).remaining;
+      let nuevaMano = [];
+      let contador = 0;
 
-        xhr.open("GET", url, true);
-        xhr.onreadystatechange = function () {
+      for (let i = 0; i < 5; i++) {
+        const cartaImg = document.getElementById(`carta${i + 1}`);
 
-          if (xhr.readyState === 4 && xhr.status === 200) {
-
-            const nuevasCartas = JSON.parse(xhr.responseText).cards;
-
-            remaining1 = JSON.parse(xhr.responseText).remaining
-            let nuevaMano = [];
-            let contador = 0;
-
-            for (let i = 0; i < 5; i++) {
-               const cartaImg = document.getElementById(`carta${i + 1}`);
-
-              if (cartaImg.classList.contains("seleccionada")) {
-              nuevaMano.push(cartasHold.shift());}
-
-              else {
-                nuevaMano.push(nuevasCartas[contador]);
-                contador++;}
-            }
-           
-              mano = nuevaMano;
-              if (mano.length === 5) {
-              verNuevaMano();
-            } else {
-              console.error("Error: no se pudo construir la mano completa", mano);
-            }
-
-            console.log(mano)
-            console.log(remaining1)
-
-            //decir resultado
-            reconocerMano()
-            //desabilitar boton pedir 
-            document.getElementById("repartir").disabled = true; 
-            //habilitar boton jugar 
-            document.getElementById("jugar").disabled = false; 
-
-            //ocultar el resultado 
-            document.getElementById("resultados").style.display = "block";
-
+        if (cartaImg.classList.contains("seleccionada")) {
+          nuevaMano.push(cartasHold.shift());
+        } else {
+          nuevaMano.push(nuevasCartas[contador]);
+          contador++;
+        }
       }
-        };
 
-    xhr.send();
+      mano = nuevaMano;
+      if (mano.length === 5) {
+        verNuevaMano();
+      } else {
+        console.error("Error: no se pudo construir la mano completa", mano);
+      }
+
+      console.log(mano);
+      console.log(remaining1);
+
+      //decir resultado
+      reconocerMano();
+      //desabilitar boton pedir
+      document.getElementById("repartir").disabled = true;
+      //habilitar boton jugar
+      document.getElementById("jugar").disabled = false;
+
+      //ocultar el resultado
+      document.getElementById("resultados").style.display = "block";
+    }
+  };
+
+  xhr.send();
 }
 //mostrar nuevas cartas
 function verNuevaMano() {
@@ -180,100 +165,117 @@ function verNuevaMano() {
   }
 }
 
-function reconocerMano(){ 
+function reconocerMano() {
+  const puntajeParrafo = document.getElementById("puntaje");
+  let puntaje = parseInt(puntajeParrafo.textContent);
+  const convertirCartas = {
+    ACE: 14,
+    KING: 13,
+    QUEEN: 12,
+    JACK: 11,
+    10: 10,
+    9: 9,
+    8: 8,
+    7: 7,
+    6: 6,
+    5: 5,
+    4: 4,
+    3: 3,
+    2: 2,
+  };
 
-const puntajeParrafo = document.getElementById("puntaje");
-let puntaje = parseInt(puntajeParrafo.textContent);
-const convertirCartas = {
-"ACE": 14, "KING": 13, "QUEEN": 12, "JACK": 11,
-"10": 10, "9": 9, "8": 8, "7": 7, "6": 6,
-"5": 5, "4": 4, "3": 3, "2": 2
-};
+  //extraer valor nuevos  y palos
+  let nuevosValores = mano.map((carta) => convertirCartas[carta.value]);
+  let categoria = mano.map((palo) => palo.suit);
 
-//extraer valor nuevos  y palos
-let nuevosValores = mano.map(carta => convertirCartas[carta.value]);
-let categoria = mano.map(palo => palo.suit);
+  console.log(nuevosValores);
+  console.log(categoria);
 
-console.log(nuevosValores)
-console.log(categoria)
+  //mirar si hay escalera
 
-// contar pares o trios, o poker 
-let diccionarioPares = {}
+  let valoresOrdenados = [...nuevosValores].sort((a, b) => a - b);
 
-nuevosValores.forEach( valor => {diccionarioPares[valor] = (diccionarioPares[valor] || 0) + 1;
+  let esEscalera = true;
 
-console.log(diccionarioPares)
-  
-}); 
-
-//verificar si existe 1 par 
-let pares = [];
-let trio = [];
-let poker = []
-let nuevoPuntaje = 0
-
-
-for (let valor in diccionarioPares) {
-
-  if (diccionarioPares[valor] === 2) {
-    pares.push(parseInt(valor)); 
-
-  }
-  else if (diccionarioPares[valor] === 3) {
-    trio.push(parseInt(valor)); 
+  for (let i = 0; i < valoresOrdenados.length - 1; i++) {
+    if (valoresOrdenados[i + 1] !== valoresOrdenados[i] + 1) {
+      esEscalera = false;
+      break;
+    }
   }
 
-  else if (diccionarioPares[valor] === 4) {
-  poker.push(parseInt(valor)); 
+  //mirar si hay color
+  const manoColor = categoria.every((palo) => palo === categoria[0]);
+
+  // contar pares o trios, o poker
+  let diccionarioPares = {};
+
+  nuevosValores.forEach((valor) => {
+    diccionarioPares[valor] = (diccionarioPares[valor] || 0) + 1;
+
+    console.log(diccionarioPares);
+  });
+
+  //verificar si existe 1 par
+  let pares = [];
+  let trio = [];
+  let poker = [];
+
+  for (let valor in diccionarioPares) {
+    if (diccionarioPares[valor] === 2) {
+      pares.push(parseInt(valor));
+    } else if (diccionarioPares[valor] === 3) {
+      trio.push(parseInt(valor));
+    } else if (diccionarioPares[valor] === 4) {
+      poker.push(parseInt(valor));
+    }
   }
-}
+
+  //verificar si tiene color
+
+  if (manoColor == true) {
+    resultado.textContent = "Tienes Color";
+    puntaje += 4;
+  }
   // verificar si tiene poker
-  if (poker.length === 1){
+  else if (poker.length === 1) {
     resultado.textContent = "Tienes Poker";
-    puntaje += 4
+    puntaje += 4;
   }
   //varificar FullHouse
   else if (trio.length === 1 && pares.length === 1) {
-  resultado.textContent = "Tienes Full House";
-  puntaje += 5;
-}
-
+    resultado.textContent = "Tienes Full House";
+    puntaje += 5;
+  }
 
   // verificar si existe trio
-  else if (trio.length === 1){
+  else if (trio.length === 1) {
     resultado.textContent = "Tienes trio";
-    puntaje += 3
+    puntaje += 3;
   }
 
-   //verificar si tiene dobrepar 
+  //verificar si tiene dobrepar
   else if (pares.length === 2) {
-  resultado.textContent = "Tienes doble par";
-  puntaje += 1;
+    resultado.textContent = "Tienes doble par";
+    puntaje += 1;
   }
 
-  //verificar si tiene par 
+  //verificar si tiene par
+  else if (pares.length === 1 && pares[0] > 10) {
+    resultado.textContent = "Tienes un par de j o mas";
+    puntaje += 2;
+  }
 
-  else if ((pares.length === 1) && (pares[0] > 10)) {
-  resultado.textContent = "Tienes un par de j o mas";
-  puntaje += 2
-} 
-
-//mano perdida
+  //mano perdida
   else {
-
-    resultado.textContent = "mano perdida"
+    resultado.textContent = "mano perdida";
     puntaje -= 1;
-
   }
   puntajeParrafo.textContent = puntaje;
- }
-
+}
 
 // algoritmo
 
-document.getElementById("jugar").addEventListener("click", armarMazo)
+document.getElementById("jugar").addEventListener("click", armarMazo);
 
 document.getElementById("repartir").onclick = pedir;
-
-      
-
