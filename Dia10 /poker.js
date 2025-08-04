@@ -160,6 +160,7 @@ function verNuevaMano() {
       cartaImg.classList.toggle("seleccionada");
     };
   }
+  
 }
 
 function reconocerMano() {
@@ -189,9 +190,22 @@ function reconocerMano() {
   console.log(categoria);
 
   //mirar si hay escalera
-
+//ordernar
   let valoresOrdenados = [...nuevosValores].sort((a, b) => a - b);
 
+
+  //mirar si hay esclaera baja 
+  let esEscaleraBaja = false;
+
+  if (
+  valoresOrdenados.includes(14) &&
+  valoresOrdenados.includes(2) &&
+  valoresOrdenados.includes(3) &&
+  valoresOrdenados.includes(4) &&
+  valoresOrdenados.includes(5)
+  ) {
+  esEscaleraBaja = true;
+  }
   let esEscalera = true;
 
   for (let i = 0; i < valoresOrdenados.length - 1; i++) {
@@ -213,7 +227,7 @@ function reconocerMano() {
     console.log(diccionarioPares);
   });
 
-  //verificar si existe 1 par
+  //mirar si existe 1 par
   let pares = [];
   let trio = [];
   let poker = [];
@@ -228,24 +242,38 @@ function reconocerMano() {
     }
   }
 
+
+  //verificar si tiene escalera real 
+
+  if ((esEscalera  == true) && (manoColor == true) && (valoresOrdenados[0]> 9)) {
+    resultado.textContent ="Tienes Escalera Real";
+    puntaje += 250;
+  } 
+
+  //verificar si tiene escalera color 
+  else if ((esEscalera  == true) && (manoColor == true)) {
+    resultado.textContent ="Tienes Escalera Color";
+    puntaje += 50;
+  } 
+
    // verificar si tiene poker
- if (poker.length === 1) {
+ else if (poker.length === 1) {
     resultado.textContent = "Tienes Poker";
-    puntaje += 4;
+    puntaje += 25;
   }
   //varificar FullHouse
   else if (trio.length === 1 && pares.length === 1) {
     resultado.textContent = "Tienes Full House";
-    puntaje += 5;
+    puntaje += 9;
   }
 
   //verificar si tiene color
-  if (manoColor == true) {
+  else if (manoColor == true) {
     resultado.textContent = "Tienes Color";
     puntaje += 6;
   }
   //verifica si es escalera
-  else if (esEscalera) {
+  else if (esEscalera || esEscaleraBaja) {
     resultado.textContent ="Tienes escalera";
     puntaje += 4;
   } 
@@ -259,13 +287,13 @@ function reconocerMano() {
   //verificar si tiene dobrepar
   else if (pares.length === 2) {
     resultado.textContent = "Tienes doble par";
-    puntaje += 1;
+    puntaje += 2;
   }
 
   //verificar si tiene par
   else if (pares.length === 1 && pares[0] > 10) {
     resultado.textContent = "Tienes un par de j o mas";
-    puntaje += 2;
+    puntaje += 1;
   }
 
   //mano perdida
@@ -281,3 +309,20 @@ function reconocerMano() {
 document.getElementById("jugar").addEventListener("click", armarMazo);
 
 document.getElementById("repartir").onclick = pedir;
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const abrirTabla = document.getElementById('apuesta');
+  const cerrar = document.querySelector('.cerrar');
+  const ventanita = document.getElementById('tarifas');
+
+  abrirTabla.addEventListener('click', () => {
+    ventanita.style.display = 'block';
+  });
+
+  cerrar.addEventListener('click', () => {
+    ventanita.style.display = 'none';
+  });
+
+});
