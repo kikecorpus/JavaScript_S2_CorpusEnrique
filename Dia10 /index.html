@@ -5,98 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Poker CampusLands</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon " href="">
 
 </head>
 <body>
+<!--Titulo -->
+
+
    <div class="encabezado">
     <h1>Poker CampusLands</h1>
   </div>
 
+
+  <!--Mesa -->
 <div class="contenedorDePagina">  
 
-<div class="resultados" id="resultados" > 
-  <p id="resultado" class="resultado"> Game Over </p>
-</div>
-
-
-  <div class="mano">
-    <img id="carta1" class="primeras" alt="Carta aparecerá aquí" src="https://deckofcardsapi.com/static/img/back.png">
-    <img id="carta2" class="primeras" src="https://deckofcardsapi.com/static/img/back.png" alt="Carta aparecerá aquí">
-    <img id="carta3" class="primeras" src="https://deckofcardsapi.com/static/img/back.png" alt="Carta aparecerá aquí">
-    <img id="carta4" src="https://deckofcardsapi.com/static/img/back.png" class="primeras" alt="Carta aparecerá aquí">
-    <img id="carta5" src="https://deckofcardsapi.com/static/img/back.png"  class="primeras" alt="Carta aparecerá aquí">
+  <div class="cajaFondo"><img class="fondop" src="./img/mesa1.png" alt=""></div>
+  <div class="resultados" id="resultados" > 
+    <p id="resultado" class="resultado"> Game Over </p>
   </div>
-
-
-</div>
-
- <div class="botones">
-    <button id="jugar">Jugar</button>
-    <button id="repartir">repartir</button>
-    <button id="reglas">Reglas</button>
-    <button id="apuesta">tabla</button>
-    <div class="puntajes">
-    <p>Creditos:</p>
-    <p id="puntaje">
-      0
-  </p></div>
-  </div>
-
-  <div id="tarifas" class="tarifas">
-  <div class="tablaTarifas">
-    <div class="arribita">
-         
-    <h2>Tabla de Pagos (1 crédito)</h2>
-     <span class="cerrar">&times;</span>
+  
+  
+    <div class="mano">
+      <img id="carta1" class="primeras" alt="Carta aparecerá aquí" src="https://deckofcardsapi.com/static/img/back.png">
+      <img id="carta2" class="primeras" src="https://deckofcardsapi.com/static/img/back.png" alt="Carta aparecerá aquí">
+      <img id="carta3" class="primeras" src="https://deckofcardsapi.com/static/img/back.png" alt="Carta aparecerá aquí">
+      <img id="carta4" src="https://deckofcardsapi.com/static/img/back.png" class="primeras" alt="Carta aparecerá aquí">
+      <img id="carta5" src="https://deckofcardsapi.com/static/img/back.png"  class="primeras" alt="Carta aparecerá aquí">
     </div>
-    
-    <table>
-      <thead>
-        <tr><th>Mano</th><th>Créditos</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Escalera Real</td><td>250</td></tr>
-        <tr><td>Escalera de color</td><td>50</td></tr>
-        <tr><td>Póker</td><td>25</td></tr>
-        <tr><td>Full House</td><td>9</td></tr>
-        <tr><td>Color (Flush)</td><td>6</td></tr>
-        <tr><td>Escalera</td><td>4</td></tr>
-        <tr><td>Trío</td><td>3</td></tr>
-        <tr><td>Doble Par</td><td>2</td></tr>
-        <tr><td>Par de J o más</td><td>1</td></tr>
-        <tr><td>Nada</td><td>-1</td></tr>
-      </tbody>
-    </table>
+  
   </div>
-</div>
- 
-
-<div id="ventanitaReglas" class="reglas">
-  <div class="containerReglas">
-    <span class="cerrar">&times;</span>
-    <h2>Reglas del Juego</h2>
-    <ul>
-      <li>Recibirás <strong>5 cartas</strong>.</li>
-      <li>Haz clic en las cartas que deseas <strong>conservar</strong>.</li>
-      <li>Presiona <strong>"Pedir"</strong> para cambiar las demás cartas.</li>
-      <li>Se mostrará tu <strong>mano final</strong>.</li>
-      <li>Si tienes una buena combinación, ¡ganas!</li>
-    </ul>
-    <h3>Combinaciones Ganadoras:</h3>
-    <ul>
-      <li>Par de J o mejor</li>
-      <li>Dos pares</li>
-      <li>Trío</li>
-      <li>Escalera</li>
-      <li>Color</li>
-      <li>Full House</li>
-      <li>Póker</li>
-      <li>Escalera de color</li>
-      <li>Escalera real</li>
-    </ul>
+  
+  <!--Botones-->
+   <div class="botones">
+      <button id="jugar">Jugar</button>
+      <button id="repartir">repartir</button>
+      <button id="reglas">Reglas</button>
+      <button id="apuesta">tabla</button>
+      <div class="puntajes">
+      <p>Creditos:</p>
+      <p id="puntaje">
+        0
+    </p></div>
+    </div>
+  
+  <!--modal tarifas-->
+    <div id="tarifas" class="tarifas">
+    <div class="tablaTarifas">
+      <div class="arribita">
+           
+      <h2>Tabla de Pagos (1 crédito)</h2>
+       <span class="cerrar">&times;</span>
+      </div>
+      
+      <table>
+        <thead>
+          <tr><th>Mano</th><th>Créditos</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Escalera Real</td><td>250</td></tr>
+          <tr><td>Escalera de color</td><td>50</td></tr>
+          <tr><td>Póker</td><td>25</td></tr>
+          <tr><td>Full House</td><td>9</td></tr>
+          <tr><td>Color (Flush)</td><td>6</td></tr>
+          <tr><td>Escalera</td><td>4</td></tr>
+          <tr><td>Trío</td><td>3</td></tr>
+          <tr><td>Doble Par</td><td>2</td></tr>
+          <tr><td>Par de J o más</td><td>1</td></tr>
+          <tr><td>Nada</td><td>-1</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+   
+   <!--modal reglas-->
+  <div id="ventanitaReglas" class="reglas">
+    <div class="containerReglas">
+      <span class="cerrar">&times;</span>
+      <h2>Reglas del Juego</h2>
+      <br>
+      <ul>
+        <li>Recibirás <strong>5 cartas</strong>.</li>
+        <li>Haz clic en las cartas que deseas <strong>conservar</strong>.</li>
+        <li>Presiona <strong>"Repartir"</strong> para cambiar las demás cartas.</li>
+        <li>Se mostrará tu <strong>mano final</strong>.</li>
+        <li>Si tienes una buena combinación, ¡ganas!</li>
+      </ul>
+      <br></br>
+      <h3>Combinaciones Ganadoras:</h3>
+      <br>
+      <ul class="spanReglas">
+        <li>Par de J o mejor - ejemplo: <span>J</span>❤️ + <span>J</span>♠️ </span>+ 8♠️ + 3♦ +K♦</li>
+        <li>Dos pares - ejemplo: <span>9</span>❤️ + <span>9</span>♠️ + 10♣ + <span>5</span>♦ + <span>5</span>❤️ </li> 
+        <li>Trío - ejemplo: <span>9</span>❤️ + <span>9</span>♣ + <span>9</span>♦ + 5♣ + 10♣</li> 
+        <li>Escalera - ejemplo: <span>1</span>❤️ +<span>2</span>♣ +<span>3</span>♠️ +<span>4</span>♣ +<span>5 </li>
+        <li>Color - ejemplo: 4<span>❤️</span> + A<span>❤️</span> + 8<span>❤️</span> + K<span>❤️</span> + 9<span>❤️ </span> </li>  
+        <li>Full House - ejemplo: <span>9</span>❤️ + <span>9</span>♣ + <span>9</span>♦ + <span>J</span>❤️ + <span>J</span>♠️</li>
+        <li>Póker - ejemplo: <span>9</span>❤️ + <span>9</span>♣ + <span>9</span>♦ + <span>9</span>♦ + 8♥</li>
+        <li>Escalera de color - ejemplo: <span>4♥ + 5♥ + 6♥ + 7♥ + 8♥</span></li>
+        <li>Escalera real - ejemplo: <span>10♥ + J♥ + Q♥ + K♥ + A♥</span></li>
+      </ul>
+    </div>
+  </div>
+<
 
-  <script src="poker.js"></script>
+
 </body>
+<script src="poker.js"></script>
 </html>

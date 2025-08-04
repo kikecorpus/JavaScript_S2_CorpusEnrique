@@ -4,6 +4,7 @@ let cartasHold = [];
 let mano = [];
 let remaining1 = 52;
 let resultado = document.getElementById("resultado");
+//desactivar boton repartir 
 document.getElementById("repartir").disabled = true;
 
 // Barajar el mazo
@@ -311,7 +312,7 @@ document.getElementById("jugar").addEventListener("click", armarMazo);
 
 document.getElementById("repartir").onclick = pedir;
 
-
+//Abrir modal de reglas y tabla
 document.addEventListener('DOMContentLoaded', () => {
 
   const abrirTabla = document.getElementById('apuesta');
@@ -326,22 +327,19 @@ document.addEventListener('DOMContentLoaded', () => {
     ventanita.style.display = 'none';
   });
 
-});
+  const botoncitoReglas = document.getElementById("reglas");
+  const ventanitaReglas = document.getElementById("ventanitaReglas");
+  const cerrarReglas = ventanitaReglas.querySelector(".cerrar");
 
-const botoncitoReglas = document.getElementById("reglas");
-const ventanitaReglas = document.getElementById("ventanitaReglas");
-const cerrarReglas = ventanitaReglas.querySelector(".cerrar");
+  botoncitoReglas.addEventListener("click", () => {
+    ventanitaReglas.style.display = "block";
+  });
 
-botoncitoReglas.addEventListener("click", () => {
-  ventanitaReglas.style.display = "block";
-});
-
-cerrarReglas.addEventListener("click", () => {
-  ventanitaReglas.style.display = "none";
-});
-
-window.addEventListener("click", (event) => {
-  if (event.target === ventanitaReglas) {
+  cerrarReglas.addEventListener("click", () => {
     ventanitaReglas.style.display = "none";
-  }
+  });
+
 });
+
+
+
