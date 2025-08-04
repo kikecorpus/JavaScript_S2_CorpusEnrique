@@ -326,3 +326,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+const botoncitoReglas = document.getElementById("reglas");
+const ventanitaReglas = document.getElementById("ventanitaReglas");
+const cerrarReglas = ventanitaReglas.querySelector(".cerrar");
+
+botoncitoReglas.addEventListener("click", () => {
+  ventanitaReglas.style.display = "block";
+});
+
+cerrarReglas.addEventListener("click", () => {
+  ventanitaReglas.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === ventanitaReglas) {
+    ventanitaReglas.style.display = "none";
+  }
+});
