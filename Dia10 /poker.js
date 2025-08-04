@@ -56,6 +56,7 @@ function MazoMesa() {
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
+      
       const cartas = JSON.parse(xhr.responseText);
       mano = cartas.cards;
       remaining1 = cartas.remaining;
