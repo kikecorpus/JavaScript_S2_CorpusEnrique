@@ -5,13 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Poker CampusLands</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon " href="">
+  <link rel="icon " href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuqt5K0lTgytJcUxBfnx-90fsC9TKVwDuUHw&s">
 
 </head>
 <body>
+<div class="contenedorR" id="contenedorR">
+  <video class="r"  id="rPar" src="./img/resultado.mp4" autoplay muted style="display: none;"></video>
+  <video class="r" id="rTrio" src="./img/resultado 2 .mp4" autoplay muted style="display: none;"></video>
+  <video class="r" id="rEscalera" src="./img/resultado3.mp4" autoplay muted style="display: none;"></video>
+</div>
+  
   <div class="contenedorIntro" id="contenedorIntro">
-    <p>POKER CAMPUSLANDS</p>
-    <video  class="intro" id="intro" src="./img/intro.mp4" autoplay muted style="display: block"></video>
+    <div class="titulo"><p>POKER CAMPUSLANDS</p></div>
+    <div><video  class="intro" id="intro" src="./img/intro.mp4" autoplay muted style="display: block"></video>
+    </div>
   </div>
 
 <div class="todo" id="todo" style="display: none">
@@ -20,13 +27,16 @@
   <!--Mesa -->
 <div class="contenedorDePagina">  
 
-    <div class="cajaFondo">
-      <img class="fondop" src="./img/mesa1.png" alt="">
+    <div class="cajaFondo" id="cajaFondo2">
+      <img class="fondop" src="./img/mesa1 - Editado.png" alt="">
+     
     </div>
 
+    <div class="cajaFondo2" id="cajaFondo2" style="display: none;"> 
+      <img class="fondop2" src="./img/mesa2.png" alt="">
+    </div>
     <div class="resultados" id="resultados" > 
       <p id="resultado" class="resultado"> Game Over </p>
-
     </div>
     
     <div class="mano">

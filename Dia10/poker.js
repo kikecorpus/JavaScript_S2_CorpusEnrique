@@ -262,52 +262,148 @@ function reconocerMano() {
   if ((esEscalera  == true) && (manoColor == true) && (valoresOrdenados[0]> 9)) {
     resultado.textContent ="Tienes Escalera Real";
     puntaje += 250;
+
+     const rEscalera = document.getElementById("rEscalera");
+      rEscalera.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rEscalera.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rEscalera.style.display = "none"})
+
+
   } 
 
   //verificar si tiene escalera color 
   else if ((esEscalera  == true) && (manoColor == true)) {
     resultado.textContent ="Tienes Escalera Color";
     puntaje += 50;
+
+     const rEscalera = document.getElementById("rEscalera");
+      rEscalera.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rEscalera.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rEscalera.style.display = "none"})
+
+    if(puntaje === 20) {
+
+      document.getElementById()
+
+    }
+
   } 
 
    // verificar si tiene poker
  else if (poker.length === 1) {
     resultado.textContent = "Tienes Poker";
     puntaje += 25;
+
+     const rEscalera = document.getElementById("rEscalera");
+      rEscalera.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rEscalera.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rEscalera.style.display = "none"})
+
   }
   //varificar FullHouse
   else if (trio.length === 1 && pares.length === 1) {
     resultado.textContent = "Tienes Full House";
     puntaje += 9;
+
+     const rEscalera = document.getElementById("rEscalera");
+      rEscalera.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rEscalera.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rEscalera.style.display = "none"})
+
   }
 
   //verificar si tiene color
   else if (manoColor == true) {
     resultado.textContent = "Tienes Color";
     puntaje += 6;
+
+    const rEscalera = document.getElementById("rEscalera");
+      rEscalera.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rEscalera.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rEscalera.style.display = "none"})
+
+
   }
   //verifica si es escalera
   else if (esEscalera || esEscaleraBaja) {
     resultado.textContent ="Tienes escalera";
     puntaje += 4;
+
+    const rTrio = document.getElementById("rTrio");
+      rTrio.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rTrio.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rTrio.style.display = "none"})
+
   } 
  
   // verificar si existe trio
   else if (trio.length === 1) {
     resultado.textContent = "Tienes trio";
     puntaje += 3;
+
+     const rTrio = document.getElementById("rTrio");
+      rTrio.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rTrio.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rTrio.style.display = "none"})
+
   }
 
   //verificar si tiene dobrepar
   else if (pares.length === 2) {
     resultado.textContent = "Tienes doble par";
     puntaje += 2;
-  }
+     const rPar = document.getElementById("rPar");
+      rPar.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rPar.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rPar.style.display = "none"
+
+  })}
 
   //verificar si tiene par
   else if (pares.length === 1 && pares[0] > 10) {
     resultado.textContent = "Tienes un par de j o mas";
     puntaje += 1;
+      const rPar = document.getElementById("rPar");
+      rPar.style.display = "block"
+      
+    document.getElementById("contenedorR").style.display = "block";
+
+    rPar.addEventListener("ended", () => {
+      document.getElementById("contenedorR").style.display = "none";
+      rPar.style.display = "none"
+  });
   }
 
   //mano perdida
