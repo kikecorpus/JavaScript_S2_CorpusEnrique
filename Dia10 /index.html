@@ -9,23 +9,26 @@
 
 </head>
 <body>
-<!--Titulo -->
-
-
-   <div class="encabezado">
-    <h1>Poker CampusLands</h1>
+  <div class="contenedorIntro" id="contenedorIntro">
+    <p>POKER CAMPUSLANDS</p>
+    <video  class="intro" id="intro" src="./img/intro.mp4" autoplay muted style="display: block"></video>
   </div>
+
+<div class="todo" id="todo" style="display: none">
 
 
   <!--Mesa -->
 <div class="contenedorDePagina">  
 
-  <div class="cajaFondo"><img class="fondop" src="./img/mesa1.png" alt=""></div>
-  <div class="resultados" id="resultados" > 
-    <p id="resultado" class="resultado"> Game Over </p>
-  </div>
-  
-  
+    <div class="cajaFondo">
+      <img class="fondop" src="./img/mesa1.png" alt="">
+    </div>
+
+    <div class="resultados" id="resultados" > 
+      <p id="resultado" class="resultado"> Game Over </p>
+
+    </div>
+    
     <div class="mano">
       <img id="carta1" class="primeras" alt="Carta aparecerá aquí" src="https://deckofcardsapi.com/static/img/back.png">
       <img id="carta2" class="primeras" src="https://deckofcardsapi.com/static/img/back.png" alt="Carta aparecerá aquí">
@@ -33,21 +36,20 @@
       <img id="carta4" src="https://deckofcardsapi.com/static/img/back.png" class="primeras" alt="Carta aparecerá aquí">
       <img id="carta5" src="https://deckofcardsapi.com/static/img/back.png"  class="primeras" alt="Carta aparecerá aquí">
     </div>
-  
-  </div>
-  
-  <!--Botones-->
-   <div class="botones">
-      <button id="jugar">Jugar</button>
-      <button id="repartir">repartir</button>
-      <button id="reglas">Reglas</button>
-      <button id="apuesta">tabla</button>
-      <div class="puntajes">
-      <p>Creditos:</p>
-      <p id="puntaje">
-        0
-    </p></div>
+      <!--Botones  -->
+    <div class="botones">
+        <button id="jugar">Jugar</button>
+        <button id="repartir">repartir</button>
+        <button id="reglas">Reglas</button>
+        <button id="apuesta">tabla</button>
+        <div class="puntajes">
+        <p>Creditos:</p>
+        <p id="puntaje">
+          0
+      </p></div>
     </div>
+
+  </div>
   
   <!--modal tarifas-->
     <div id="tarifas" class="tarifas">
@@ -107,9 +109,7 @@
       </ul>
     </div>
   </div>
-<
-
-
+</div>
 </body>
 <script src="poker.js"></script>
 </html>

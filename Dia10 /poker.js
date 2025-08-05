@@ -4,6 +4,17 @@ let cartasHold = [];
 let mano = [];
 let remaining1 = 52;
 let resultado = document.getElementById("resultado");
+
+// animacion intro 
+
+  const video = document.getElementById("intro");
+
+  video.addEventListener("ended", () => {
+    document.getElementById("contenedorIntro").style.display = "none";
+    document.getElementById("todo").style.display = "block";
+  });
+
+
 //desactivar boton repartir 
 document.getElementById("repartir").disabled = true;
 
@@ -70,7 +81,8 @@ function MazoMesa() {
         const cartaImg = document.getElementById(`carta${i + 1}`);
         cartaImg.src = carta.image;
         cartaImg.onclick = function () {
-          cartaImg.classList.toggle("seleccionada");
+        cartaImg.classList.toggle("seleccionada") 
+
         };
       }
     }
