@@ -17,6 +17,21 @@ body {
 
 /*Intro*/
 
+.kikeCorpus_S2{
+
+  position: relative;
+  width: 25vw;
+  height: 8vw;
+  z-index: 1000;
+  background-color: green;
+  display: flex;
+  align-content: end;
+  margin-top: 600px;
+  margin-left: 1000px;
+  font-size: 2vw;
+  color: white;
+  padding: 1rem;
+}
 
 .contenedorIntro {
   display: flex;
@@ -26,7 +41,6 @@ body {
   width: 100vw;
   position: relative;
 }
-
 
 .intro { 
   position: fixed;
@@ -42,11 +56,15 @@ body {
  
 }
 .titulo {
-z-index: 2;
+  z-index: 2;
   color: white;
   font-size: 4vw;
   font-weight: bold;
-  z-index: 1000;
+  z-index: 1001;
+  position: absolute;
+  
+
+
 }
 .titulo p {
 
